@@ -8,7 +8,7 @@ import Correct from "./pages/Correct";
 import Other from "./pages/Other";
 import Total from "./pages/Total";
 
-import usePageTracking from "../hooks/usePageTracking";
+import usePageTracking from "./hooks/usePageTracking";
 // 將你的 App 組件中的 state 和 handlers 傳遞進來
 
 const AnimatedRoutes = ({
