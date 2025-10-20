@@ -1,0 +1,41 @@
+// src/components/list.scss
+
+.list-container {
+  // 這些樣式可以保留，但建議用 margin 代替 position 來控制位置
+  // position: relative;
+  // left: 2%;
+  // top: 5%;
+  width: 90%; // 給一個寬度
+  margin: 20px auto; // 上下 20px，左右置中
+  display: flex;
+  flex-direction: column;
+  gap: 10px; // 增加項目之間的間距
+
+  .list-item {
+    display: flex;
+    // 👇 核心改動：
+    // 這會把第一個子元素 (標題) 推到最左邊，
+    // 把最後一個子元素 (分數) 推到最右邊，中間的空間會被拉開。
+    justify-content: space-between;
+    align-items: center; // 讓標題和分數在垂直方向上置中對齊
+    padding: 10px; // 增加一些內距讓它看起來更好
+    background-color: #f8f8f8; // 加個背景色
+    border-radius: 5px;
+
+    .item-name {
+      // 標題樣式 (可以自行調整)
+      font-size: 1.1rem;
+    }
+
+    p {
+      // 👇 移除舊的 position 樣式
+      // position: relative;
+      // left: 50%;
+
+      // 新增樣式 (可以自行調整)
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+    }
+  }
+}

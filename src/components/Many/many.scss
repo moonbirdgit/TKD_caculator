@@ -1,0 +1,130 @@
+@import "../../color.scss";
+
+.many-container {
+  display: flex;
+  justify-content: space-between;
+  width: 95%;
+
+  height: 16%;
+  margin: 8% auto 0;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 10px;
+  border: 1px solid #dee2e6;
+  box-sizing: border-box;
+}
+
+/* 左半部分 (微調) */
+.many-score-section {
+  flex-basis: 20%; // 調整佔比以給右邊更多空間
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding-right: 15px;
+  border-right: 1px solid #e9ecef;
+  h6 {
+    position: relative;
+    bottom: 20%;
+  }
+  p {
+    position: relative;
+    bottom: 5%;
+  }
+}
+
+.many-score-value {
+  font-size: 1.5rem; // 保持較小的字體
+  font-weight: bold;
+  color: $main-color;
+  margin: 0;
+}
+
+/* 右半部分 (完全重寫為多欄位網格) */
+.many-list-section {
+  flex-basis: 80%; // 給右邊表格更多空間
+  padding-left: 12px;
+
+  // 核心修改：使用 CSS Grid 創建 6 個欄位
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); // 創建 6 個等寬的欄位
+  gap: 2px; // 欄位之間的間距
+}
+
+.category-block {
+  // 每個分類區塊會自動填入一欄
+  text-align: center; // 讓標題和按鈕內容都居中
+}
+
+.category-title {
+  font-size: 0.7rem; // 使用更小的字體作為標題
+  font-weight: bold;
+  color: #6c757d;
+  margin: 0 0 8px 0;
+  // text-transform: uppercase; // 字母大寫可以增加設計感 (可選)
+}
+
+// .category-values 不需要特殊樣式
+
+.many-button {
+  display: block; // 每個按鈕佔據一行
+  width: 100%; // 寬度充滿其所在的網格欄位
+  padding: 5px 0; // 調整垂直內邊距，水平為0因為已居中
+  margin-bottom: 5px; // 按鈕之間的垂直間距
+  background-color: white;
+
+  border-radius: 5px;
+  font-size: 0.85rem; // 保持較小的字體
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.many-button:last-child {
+  margin-bottom: 0;
+}
+
+.many-button:hover {
+  background-color: #e9ecef;
+}
+
+.many-button.selected {
+  background-color: $main-color;
+  color: white;
+  border-color: $back-color;
+  font-weight: bold;
+}
+@media screen and (max-height: 700px) {
+  .many-container {
+    height: 18%;
+  }
+  .many-score-section {
+    border-right: none;
+    border-bottom: 1px solid #e9ecef;
+  }
+
+  .many-button {
+    font-size: 0.8rem;
+    padding: 4px 0;
+  }
+}
+@media screen and (min-width: 700px) {
+  .many-container {
+    height: 16%;
+    width: 85%;
+  }
+  .many-button {
+    font-size: 1.2rem;
+  }
+  .category-title {
+    font-size: 1rem;
+  }
+  .many-score-section {
+    h6 {
+      font-size: 1.2rem;
+    }
+    p {
+      font-size: 2rem;
+    }
+  }
+}

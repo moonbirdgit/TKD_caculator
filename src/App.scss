@@ -1,0 +1,28 @@
+@import "./color.scss";
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+}
+
+.App {
+  width: 100vw;
+  height: 100vh;
+  .pages {
+    .header {
+      font-size: 18px;
+    }
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+  }
+}
+// ... 你原有的樣式
+
+// 這是 Framer Motion 動畫需要的樣式
+.App > div[style*="position: relative"] > div {
+  // 這裡選擇的是 motion.div
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}

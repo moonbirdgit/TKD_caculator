@@ -1,0 +1,33 @@
+@import "../../color.scss";
+nav {
+  position: sticky;
+  top: 92%;
+  display: flex;
+  align-items: center;
+  padding: 10px 0 0 0;
+  justify-content: space-around;
+  width: 100vw;
+  border-top: 1px solid $back-color;
+  a {
+    display: flex;
+
+    align-items: center;
+    flex-direction: column;
+    text-decoration: none;
+    color: $main-color;
+  }
+}
+@media screen and (min-height: 900px) {
+  nav {
+    top: 87%;
+
+    padding: 5% 0 0 0;
+    a {
+      font-size: 1.5rem;
+    }
+    svg {
+      scale: 2;
+      margin: 0 0 10px 0;
+    }
+  }
+}

@@ -1,0 +1,55 @@
+// 你的 Timer.jsx 對應的 style.scss
+
+@import "../../color.scss";
+@keyframes click-color-change {
+  // 動畫開始 (0%) 和結束 (100%) 時是原始顏色
+  0%,
+  100% {
+    color: $main-color;
+    transform: scale(1); // 順便讓大小也恢復
+  }
+  // 動畫中途 (50%) 變成黑色
+  50% {
+    color: black;
+    transform: scale(0.95); // 加上一點縮放，更有按下的感覺
+  }
+}
+.timer {
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  top: 35%;
+
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 50%;
+    .btns {
+      position: relative;
+      top: 10%;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+    }
+    div {
+      font-size: 40px;
+    }
+    button {
+      color: $main-color;
+      font-size: 1.6rem;
+      background-color: white;
+      padding: 8px 16px;
+      border-radius: 5px;
+      transition: all 0.15s ease-in-out;
+
+      // 👇 2. 建立一個 class 來應用這個動畫
+      // 這個 class 將由 React 動態添加
+      &.animate-click {
+        animation-name: click-color-change;
+        animation-duration: 0.4s; // 這個時間要和 JS 中的變數一致
+        animation-timing-function: ease-in-out;
+      }
+    }
+  }
+}
