@@ -1,0 +1,13 @@
+.viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+.page {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}

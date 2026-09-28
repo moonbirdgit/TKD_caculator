@@ -1,70 +1,56 @@
-# Getting Started with Create React App
+# 跆拳道品勢計算機
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+為跆拳道品勢比賽設計的線上計分器：輸入正確性扣分與表現性評分，自動計算總分與演練時長。
 
-## Available Scripts
+```bash
+npm start       # 開發模式 http://localhost:3000
+npm run build   # 產出 build/
+```
 
-In the project directory, you can run:
+## 排版（依裝置）
 
-### `npm start`
+| 寬度 / 情境 | 排版 |
+| --- | --- |
+| 手機直向 | 單頁 + 底部分頁列，左右滑動換頁；扣分鍵放在下半部方便拇指操作 |
+| 手機橫向（高度 ≤ 520px） | 精簡 Header / 分頁列；正確性頁改為左右兩欄 |
+| 平板直向 | 單頁，內容寬度上限 640px，按鍵與字級放大 |
+| ≥ 1024px（平板橫向、桌機） | 儀表板：正確性 / 表現性 / 結果三欄同時顯示，不需換頁 |
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+頁面內部元件使用 **container query**，依「實際可用寬度」而非螢幕寬度調整，
+所以同一個元件放在手機全寬或桌機窄欄都能正確排版。
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 設計系統
 
-### `npm test`
+```
+src/styles/
+  _tokens.scss   設計 token（CSS 變數）：色彩、字級、間距、圓角、陰影、動態；含深色模式
+  _mixins.scss   斷點 ($bp-sm / $bp-md / $bp-dashboard)、short、pressable、surface 等 mixin
+  global.scss    reset 與全域樣式
+src/components/ui/
+  Button         variant: primary | secondary | ghost | danger，size: sm | md | lg；IconButton
+  Card           一般容器
+  Meter          進度條
+  Icons          24×24、currentColor 線條圖示
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+原則：
 
-### `npm run build`
+- 元件只使用 `var(--token)`，不寫死顏色與尺寸；深色模式只需覆寫 token。
+- 每個元件一個資料夾，樣式用 `*.module.scss`（CSS Modules）避免命名衝突。
+- 觸控目標至少 44px（`--touch-min`）。
+- `$bp-dashboard` 需與 `src/constants/layout.js` 的 `DASHBOARD_QUERY` 保持一致。
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 程式結構
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```
+src/
+  constants/scoring.js   計分規則（分數以 1/10 為單位的整數儲存，避免浮點誤差）
+  constants/layout.js    路由與斷點
+  state/ScoreContext.js  全域分數與計時器狀態
+  hooks/                 useStopwatch、useMediaQuery、usePageTracking (GA)
+  components/layout/     AppShell、Header、TabBar、PagedView（手機滑動）、Dashboard（大螢幕）、Page
+  components/            ScoreHero、Stopwatch、DeductionPad、GradeSelector、ScoreSummary、ResultBreakdown…
+  pages/                 Correct（正確性）、Other（表現性）、Total（結果）
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+本專案僅用於學習與分享，無營利目的。

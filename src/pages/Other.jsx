@@ -1,36 +1,35 @@
 import React from "react";
-import Header from "../components/Header/Header";
-import Nav from "../components/Nav/Nav";
-import Many from "../components/Many/Many";
-import Preview from "../components/Preview/Preview";
-function Other({ correctScore, multipliers, onMultiplierChange }) {
-  let perScore = multipliers.power + multipliers.time + multipliers.spirit;
-  return (
-    <div className="other pages">
-      <Header title="表現性評分" />
+import Page from "../components/layout/Page/Page";
+import GradeSelector from "../components/GradeSelector/GradeSelector";
+import ScoreSummary from "../components/ScoreSummary/ScoreSummary";
+import { useScore } from "../state/ScoreContext";
+import { PRESENTATION_CRITERIA } from "../constants/scoring";
+import styles from "./Other.module.scss";
 
-      <Many
-        name="速度與力量"
-        selectedMultiplier={multipliers.power}
-        onSelectMultiplier={(value) => onMultiplierChange("power", value)}
-      />
-      <Many
-        name="節奏與時間"
-        selectedMultiplier={multipliers.time}
-        onSelectMultiplier={(value) => onMultiplierChange("time", value)}
-      />
-      <Many
-        name="精神表現"
-        selectedMultiplier={multipliers.spirit}
-        onSelectMultiplier={(value) => onMultiplierChange("spirit", value)}
-      />
-      <Preview
-        correctScore={correctScore.toFixed(1)}
-        perScore={perScore.toFixed(1)}
-        total={(correctScore + perScore).toFixed(1)}
-      />
-      <Nav />
-    </div>
+// showSummary：儀表板模式下結果欄已經顯示總分，因此不需要重複
+function Other({ showSummary = true }) {
+  const { accuracy, presentation, presentationTotal, total, setPresentation } =
+    useScore();
+
+  return (
+    <Page title="表現性評分">
+      {PRESENTATION_CRITERIA.map((criterion) => (
+        <GradeSelector
+          key={criterion.key}
+          label={criterion.label}
+          value={presentation[criterion.key]}
+          onChange={(value) => setPresentation(criterion.key, value)}
+        />
+      ))}
+      {showSummary && (
+        <ScoreSummary
+          className={styles.summary}
+          accuracy={accuracy}
+          presentation={presentationTotal}
+          total={total}
+        />
+      )}
+    </Page>
   );
 }
 

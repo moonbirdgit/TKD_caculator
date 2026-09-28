@@ -1,0 +1,67 @@
+@use "../../../styles/mixins" as *;
+
+.header {
+  flex-shrink: 0;
+  padding-top: env(safe-area-inset-top);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  background: var(--color-bg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: var(--header-height);
+  padding: 0 var(--space-2) 0 var(--space-4);
+
+  @include up($bp-dashboard) {
+    height: 64px;
+    padding: 0 var(--space-4) 0 var(--space-6);
+  }
+
+  @include short {
+    height: 44px;
+  }
+}
+
+.logo {
+  width: 32px;
+  height: 32px;
+
+  @include short {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+.titles {
+  flex: 1;
+  min-width: 0;
+}
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: 1.2;
+  color: var(--color-text-subtle);
+
+  @include short {
+    display: none;
+  }
+}
+
+.title {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include short {
+    font-size: var(--text-lg);
+  }
+}

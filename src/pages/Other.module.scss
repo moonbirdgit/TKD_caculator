@@ -1,0 +1,13 @@
+@use "../styles/mixins" as *;
+
+// 內容較多時摘要固定在可視範圍底部；
+// 高度很小（手機橫向）時改為跟著內容捲動，避免遮住評分區
+.summary {
+  position: sticky;
+  bottom: 0;
+  margin-top: auto;
+
+  @include short {
+    position: static;
+  }
+}

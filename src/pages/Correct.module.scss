@@ -1,0 +1,29 @@
+.status {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+// 直向：按鍵區佔滿剩餘高度，落在拇指好按的下半部
+.pad {
+  flex: 1;
+  margin-top: var(--space-2);
+}
+
+// 夠寬時（手機橫向、平板）改為左右兩欄
+@container (min-width: 600px) {
+  .layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+
+  .status {
+    justify-content: center;
+  }
+
+  .pad {
+    margin-top: 0;
+  }
+}

@@ -1,0 +1,91 @@
+@use "../../styles/mixins" as *;
+
+.pad {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+// -0.1 / -0.3 最常用 → 上排兩顆大鍵；-0.6 橫跨整列
+.deductions {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(96px, 1.4fr) minmax(64px, 1fr);
+  gap: var(--space-3);
+  min-height: 200px;
+  max-height: 440px;
+
+  > :nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  @include short {
+    min-height: 0;
+    grid-template-rows: minmax(64px, 1fr) minmax(48px, 0.8fr);
+    gap: var(--space-2);
+  }
+}
+
+.corrections {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.groupLabel {
+  padding: 0 var(--space-2);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+}
+
+.key {
+  @include pressable;
+  @include numeric;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius-lg);
+  font-weight: var(--weight-bold);
+  line-height: 1;
+}
+
+.deduct {
+  font-size: clamp(1.75rem, 9cqi, 2.5rem);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
+
+  &:active {
+    background: var(--color-danger-pressed);
+  }
+
+  @include short {
+    font-size: var(--text-2xl);
+  }
+}
+
+.correct {
+  min-height: 48px;
+  font-size: var(--text-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent-strong);
+
+  &:active {
+    background: var(--color-accent-soft);
+  }
+
+  @include short {
+    min-height: 40px;
+  }
+}
+
+@media (hover: hover) {
+  .deduct:hover {
+    background: var(--color-danger-pressed);
+  }
+  .correct:hover {
+    background: var(--color-accent-soft);
+  }
+}

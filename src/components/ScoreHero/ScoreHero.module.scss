@@ -1,0 +1,72 @@
+@use "../../styles/mixins" as *;
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-5) var(--space-5) var(--space-4);
+  text-align: center;
+
+  @include short {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-1);
+  }
+}
+
+.label {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-muted);
+  letter-spacing: 0.08em;
+}
+
+.score {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  line-height: 1;
+}
+
+.value {
+  @include numeric;
+  display: inline-block;
+  font-size: clamp(3.5rem, 20cqi, 6rem);
+  font-weight: var(--weight-black);
+  animation: pop var(--duration-slow) var(--ease-standard);
+
+  @include short {
+    font-size: 3rem;
+  }
+}
+
+.accent .value {
+  color: var(--color-accent-strong);
+}
+
+.max {
+  @include numeric;
+  font-size: var(--text-lg);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text-subtle);
+}
+
+.meter {
+  max-width: 240px;
+  margin-top: var(--space-2);
+
+  @include short {
+    display: none;
+  }
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0.6;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

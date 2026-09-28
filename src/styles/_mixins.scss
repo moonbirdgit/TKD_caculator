@@ -1,0 +1,58 @@
+// =============================================================
+// Breakpoints & mixins
+// $bp-dashboard 必須與 src/constants/layout.js 的 DASHBOARD_QUERY 一致。
+// =============================================================
+
+$bp-sm: 480px; // 大尺寸手機
+$bp-md: 768px; // 平板直向
+$bp-dashboard: 1024px; // 平板橫向 / 桌機：三欄同時顯示
+
+@mixin up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+// 手機橫向等高度很有限的情況
+@mixin short {
+  @media (max-height: 520px) {
+    @content;
+  }
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@mixin pressable {
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  transition: background-color var(--duration-fast) var(--ease-standard),
+    color var(--duration-fast) var(--ease-standard),
+    transform var(--duration-fast) var(--ease-standard);
+
+  &:active:not(:disabled) {
+    transform: scale(0.97);
+  }
+}
+
+@mixin surface {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+@mixin numeric {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}

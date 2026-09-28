@@ -1,36 +1,23 @@
-import React, { useRef, useEffect } from "react";
-import Header from "../components/Header/Header";
-import Nav from "../components/Nav/Nav";
-import Timer from "../components/Timer/Timer";
-import Buttons from "../components/Buttons/Buttons";
-import Score from "../components/Score/Score";
+import React from "react";
+import Page from "../components/layout/Page/Page";
+import ScoreHero from "../components/ScoreHero/ScoreHero";
+import Stopwatch from "../components/Stopwatch/Stopwatch";
+import DeductionPad from "../components/DeductionPad/DeductionPad";
+import { useScore } from "../state/ScoreContext";
+import { ACCURACY_MAX } from "../constants/scoring";
+import styles from "./Correct.module.scss";
 
-function Correct({ score, onScoreChange, onResetAll, time, setTime }) {
-  const pageRef = useRef(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (pageRef.current) {
-        pageRef.current.scrollIntoView({
-          behavior: "smooth",
-          block: "end",
-        });
-      }
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, []);
+function Correct() {
+  const { accuracy, adjustAccuracy, stopwatch, resetAll } = useScore();
 
   return (
-    <div className="correct pages">
-      <Header title="正確性評分" />
-
-      <Score score={score} />
-      <Timer onResetAll={onResetAll} time={time} setTime={setTime} />
-
-      <Buttons onScoreChange={onScoreChange} />
-      <Nav ref={pageRef} />
-    </div>
+    <Page title="正確性評分" className={styles.layout}>
+      <div className={styles.status}>
+        <ScoreHero label="正確性" value={accuracy} max={ACCURACY_MAX} />
+        <Stopwatch stopwatch={stopwatch} onReset={resetAll} />
+      </div>
+      <DeductionPad onAdjust={adjustAccuracy} className={styles.pad} />
+    </Page>
   );
 }
 

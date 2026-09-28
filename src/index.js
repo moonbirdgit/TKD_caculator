@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import "./styles/global.scss";
 import App from "./App";
-import * as serviceWorkerRegistration from "./serviceWorkerRegistration"; // 👈 新增這一行
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -10,5 +11,5 @@ root.render(
   </React.StrictMode>
 );
 
-// 👇 新增這一行來啟用 PWA 功能
+// 啟用 PWA 功能
 serviceWorkerRegistration.register();

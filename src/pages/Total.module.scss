@@ -1,0 +1,21 @@
+@use "../styles/mixins" as *;
+
+.duration {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.durationValue {
+  @include numeric;
+  margin-left: var(--space-1);
+  font-weight: var(--weight-bold);
+  color: var(--color-text);
+}
+
+.reset {
+  margin-top: auto;
+}

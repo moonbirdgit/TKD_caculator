@@ -1,0 +1,19 @@
+.dashboard {
+  display: grid;
+  grid-template-columns:
+    minmax(300px, 1fr)
+    minmax(380px, 1.35fr)
+    minmax(260px, 0.9fr);
+  gap: var(--space-4);
+  height: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-6);
+}
+
+.column {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: var(--radius-xl);
+}

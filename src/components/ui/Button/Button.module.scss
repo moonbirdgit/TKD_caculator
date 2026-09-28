@@ -1,0 +1,96 @@
+@use "../../../styles/mixins" as *;
+
+.button {
+  @include pressable;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+  white-space: nowrap;
+
+  &:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+}
+
+// ---- Sizes ----
+.sm {
+  min-height: 36px;
+  padding: 0 var(--space-3);
+  font-size: var(--text-sm);
+}
+
+.md {
+  min-height: var(--touch-min);
+  padding: 0 var(--space-4);
+  font-size: var(--text-md);
+}
+
+.lg {
+  min-height: 52px;
+  padding: 0 var(--space-5);
+  font-size: var(--text-lg);
+}
+
+.block {
+  display: flex;
+  width: 100%;
+}
+
+// ---- Variants ----
+.primary {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+
+  &:active:not(:disabled) {
+    filter: brightness(0.92);
+  }
+}
+
+.secondary {
+  background: var(--color-surface-muted);
+  color: var(--color-text);
+
+  &:active:not(:disabled) {
+    background: var(--color-surface-pressed);
+  }
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-text-muted);
+
+  &:active:not(:disabled) {
+    background: var(--color-surface-muted);
+  }
+}
+
+.danger {
+  background: var(--color-danger);
+  color: var(--color-on-danger);
+}
+
+@media (hover: hover) {
+  .secondary:hover:not(:disabled),
+  .ghost:hover:not(:disabled) {
+    background: var(--color-surface-pressed);
+    color: var(--color-text);
+  }
+
+  .primary:hover:not(:disabled),
+  .danger:hover:not(:disabled) {
+    filter: brightness(1.05);
+  }
+}
+
+// ---- Icon only ----
+.icon {
+  width: var(--touch-min);
+  height: var(--touch-min);
+  padding: 0;
+  border-radius: var(--radius-pill);
+}

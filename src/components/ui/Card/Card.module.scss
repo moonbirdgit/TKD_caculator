@@ -1,0 +1,6 @@
+@use "../../../styles/mixins" as *;
+
+.card {
+  @include surface;
+  padding: var(--space-4);
+}
